@@ -5,7 +5,7 @@ export interface Campaign {
     id: string;
     name: string;
     status: CampaignStatus;
-    platform: string;
+    platforms: string[];
     budget: number;
 }
 
