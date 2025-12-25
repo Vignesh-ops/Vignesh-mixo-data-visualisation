@@ -6,18 +6,19 @@ type Props = {
     campaigns: Campaign[];
 };
 type Campmodal = {
-    id:string | null,
-    title:string | null
+    id: string | null,
+    title: string | null
 }
 
 export default function CampaignTable({ campaigns }: Props) {
-    const [selectedCampaignId, setSelectedCampaignId] = useState<Campmodal>({id:null,title:null});
+    const [selectedCampaignId, setSelectedCampaignId] = useState<Campmodal>({ id: null, title: null });
 
-    const statuscolors = {
+    const statusColors: Record<Campaign["status"], string> = {
         active: "green",
         paused: "yellow",
         completed: "blue",
-    }
+      };
+      
 
     return (
         <>
@@ -36,14 +37,14 @@ export default function CampaignTable({ campaigns }: Props) {
                     {campaigns.map((campaign) => (
                         <tr key={campaign?.id} className="border-t text-center">
                             <td className="p-2">{campaign?.name}</td>
-                            <td className="p-2">{campaign?.status} {<span style={{fontSize:'0.8rem',color:`${statuscolors[campaign?.status]}`}}>🎯</span>}</td>
+                            <td className="p-2">{campaign?.status} {<span style={{ fontSize: '0.8rem', color: `${statusColors[campaign?.status]}` }}>🎯</span>}</td>
                             <td className="p-2">{campaign?.platforms.join(", ")}</td>
                             <td className="p-2">${campaign?.budget}</td>
 
-                            <td  className="p-2" style={{ verticalAlign: 'middle'}}>
+                            <td className="p-2" style={{ verticalAlign: 'middle' }}>
                                 <button
-                                    onClick={() => setSelectedCampaignId((prev)=>{
-                                        return {...prev,id:campaign.id,title:campaign.name}
+                                    onClick={() => setSelectedCampaignId((prev) => {
+                                        return { ...prev, id: campaign.id, title: campaign.name }
                                     })}
                                     className="text-grey-600 text-center"
                                 >
@@ -55,13 +56,13 @@ export default function CampaignTable({ campaigns }: Props) {
                 </tbody>
             </table >
 
-         
+
             {
                 selectedCampaignId.id && (
                     <CampaignDetailsModal
                         campaignTitle={selectedCampaignId?.title}
                         campaignId={selectedCampaignId.id}
-                        onClose={() => setSelectedCampaignId((prev)=>{return {...prev,id:null,title:null}})}
+                        onClose={() => setSelectedCampaignId((prev) => { return { ...prev, id: null, title: null } })}
                     />
                 )
             }
