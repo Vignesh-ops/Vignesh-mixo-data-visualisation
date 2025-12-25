@@ -37,7 +37,7 @@ export default function CampaignTable({ campaigns }: Props) {
                     {campaigns.map((campaign) => (
                         <tr key={campaign?.id} className="border-t text-center">
                             <td className="p-2">{campaign?.name}</td>
-                            <td className="p-2">{campaign?.status} {<span style={{ fontSize: '0.8rem', color: `${statusColors[campaign?.status]}` }}>🎯</span>}</td>
+                            <td className="p-2">{campaign?.status} {<span style={{ fontSize: '0.8rem', color: `${statusColors[campaign?.status]}` }}>⬤</span>}</td>
                             <td className="p-2">{campaign?.platforms.join(", ")}</td>
                             <td className="p-2">${campaign?.budget}</td>
 
