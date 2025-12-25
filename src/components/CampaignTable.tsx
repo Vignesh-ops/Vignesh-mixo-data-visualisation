@@ -17,8 +17,8 @@ export default function CampaignTable({ campaigns }: Props) {
         active: "green",
         paused: "yellow",
         completed: "blue",
-      };
-      
+    };
+
 
     return (
         <>
@@ -57,15 +57,16 @@ export default function CampaignTable({ campaigns }: Props) {
             </table >
 
 
-            {
-                selectedCampaignId.id && (
-                    <CampaignDetailsModal
-                        campaignTitle={selectedCampaignId?.title}
-                        campaignId={selectedCampaignId.id}
-                        onClose={() => setSelectedCampaignId((prev) => { return { ...prev, id: null, title: null } })}
-                    />
-                )
-            }
+            {selectedCampaignId.id && selectedCampaignId.title && (
+                <CampaignDetailsModal
+                    campaignTitle={selectedCampaignId.title}
+                    campaignId={selectedCampaignId.id}
+                    onClose={() =>
+                        setSelectedCampaignId({ id: null, title: null })
+                    }
+                />
+            )}
+
         </>
     );
 }
